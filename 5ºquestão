@@ -1,0 +1,18 @@
+#questão 112
+#Soma do caminho
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+// função que percorre a árvore e verifica se existe um caminho cujo soma dos valores dos nós seja igual ao targetSum.
+bool hasPathSum(struct TreeNode* root, int targetSum){
+    if(root==NULL) return false;   
+    if(root->val==targetSum && root->left==NULL && root->right==NULL) return true;
+    return hasPathSum(root->left,targetSum-root->val) || hasPathSum(root->right,targetSum-root->val);
+}
