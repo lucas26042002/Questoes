@@ -1,0 +1,29 @@
+#questão 98
+#Validar árvore de pesquisa binária
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+bool helper(struct TreeNode* node, long leftBoundary, long rightBoundary) {
+
+    if (node == NULL) return true;
+    if (!(node->val > leftBoundary && node->val < rightBoundary)) {
+        return false;
+    }
+
+    return helper(node->left, leftBoundary, node->val) && helper(node->right, node->val, rightBoundary);
+
+}
+
+// função  que chama helper com os limites iniciais LONG_MIN(o menor valor possível para um long) para leftBoundarye LONG_MAX(o maior valor possível para um long) para rightBoundary.
+
+bool isValidBST(struct TreeNode* root){
+
+    return helper(root, LONG_MIN, LONG_MAX);
+
+}
