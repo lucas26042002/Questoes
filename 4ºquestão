@@ -1,0 +1,32 @@
+#questão 114
+#Achatar árvore binária em lista vinculada
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+//  função que reorganizar a árvore de forma que todos nós temos disponíveis em uma única linha, seguindo a ordem dos nós em uma travessia em ordem.
+
+void flatten(struct TreeNode* root){
+    if(!root) return;
+    
+    struct TreeNode *saveLeft, *saveRight, *pom;
+    
+    if(root->left != NULL)
+    {
+        saveRight = root->right;
+        saveLeft = root->left;
+        
+        pom = saveLeft;
+        while(pom->right)
+            pom = pom->right;
+        pom->right = saveRight;
+        root->left = NULL;
+        root->right = saveLeft;
+    }
+    flatten(root->right);
+}
