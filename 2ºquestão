@@ -1,0 +1,26 @@
+# Questão 111
+# Profundidade mínima da árvore binária
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+ // função recursiva que calcula a profundidade mínima
+int travel(struct TreeNode* root){
+  if(root == NULL) return INT_MAX;
+  if(root->right == NULL && root->left == NULL) return 1;
+  int left = travel(root->left);
+  int right = travel(root->right);
+  return (left < right? left : right) + 1;
+}
+
+// chamada para calcular a profundidade mínima da árvore binária
+int minDepth(struct TreeNode* root){
+  if(root == NULL) return 0;
+  return travel(root);
+}
